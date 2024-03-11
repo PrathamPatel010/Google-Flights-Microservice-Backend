@@ -1,14 +1,12 @@
 # **Airline Booking Backend System-Design Doc**
 
 <div style="text-align: justify"> 
-Objective:
-<br>
+<h3>Objective</h3>
 We need to build a backend system that can support different features for an airline company. Our end user is going to be someone who wants to book flights and query about flights so we need a robust system to actually give the best experience possible.
 
 This Doc is solely going to focus on the backend part of the system. We want to prepare the backend keeping the fact in mind that the codebase should be as maintainable as possible.
 
-Functional Requirements:
-
+<h3>Functional Requirements</h3>
 <i><u>Note:[V2] - Denotes that these features are for future enhancement.</i></u>
 
 - A user should be able to search for flights from one place to another.
@@ -40,8 +38,7 @@ Functional Requirements:
 - Coupons for discount and offers.
 - While making a booking, a person can reserve more than one seats with one login id.
 
-Non Functional Requirements:
-
+<h3>Non Functional Requirements</h3>
 - We can expect that we are going to have more flight searches than flight bookings.
 - System needs to be accurate in terms of booking.
 - Expect that we will be having approx 1,00,000 total users, 5,00,000 bookings might come up in one quarter.
