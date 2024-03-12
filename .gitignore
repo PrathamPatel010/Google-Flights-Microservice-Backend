@@ -1,4 +1,4 @@
 .idea
 FlightsAndSearch/node_modules
 FlightsAndSearch/.env
-FlightsAndSearch/config/config.json
+FlightsAndSearch/src/config/config.json
