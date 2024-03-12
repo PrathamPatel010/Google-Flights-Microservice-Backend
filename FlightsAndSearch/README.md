@@ -32,6 +32,7 @@
 ```
 - Once you've added your db config, go to src folder.
 - execute `npx sequelize db:create`
+- execute `npx sequelize db:migrate`
 
 
 ## DB DESIGN
