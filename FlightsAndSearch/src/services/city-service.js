@@ -44,4 +44,6 @@ class CityService{
             throw {message:err.message};
         }
     }
-}   
+}
+
+module.exports = CityService;
