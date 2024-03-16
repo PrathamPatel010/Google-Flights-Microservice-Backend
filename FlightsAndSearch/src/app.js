@@ -11,6 +11,4 @@ const setupAndStartServer = async () => {
     });
 }
 
-(async function (){
-    await setupAndStartServer();
-})();
+setupAndStartServer();
