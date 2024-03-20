@@ -87,6 +87,16 @@ class CityRepository{
         }
     }
 
+    async getAirports(cityId){
+        try{
+            const city = await City.findByPk(cityId);
+            const airports = await city.getAirports();
+            return airports;
+        } catch (err){
+            console.log(`Something went wrong in CityRepository layer`);
+            throw {message:err};
+        }
+    }
 
 }
 

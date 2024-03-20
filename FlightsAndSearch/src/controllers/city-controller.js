@@ -127,5 +127,25 @@ const createMultiple = async(req,res) => {
         });
     }
 };
-module.exports = {create,createMultiple,destroy,get,update,getAll};
+
+const getAirports = async(req,res) => {
+    try{
+        const airports = await cityService.getAirports(req.params);
+        return res.status(200).json({
+            data: airports,
+            success:true,
+            message: `${airports.length} ${airports.length>1 ? 'Airports' : 'Airport'} fetched successfully`,
+            err: {},
+        });
+    } catch (err){
+        console.log(`${err.message}`);
+        return res.status(500).json({
+            data: {},
+            success:false,
+            message: "Airports not able to be fetched",
+            err: err.message,
+        });
+    }
+}
+module.exports = {create,createMultiple,destroy,get,update,getAll,getAirports};
 
