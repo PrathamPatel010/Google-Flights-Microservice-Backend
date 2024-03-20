@@ -54,6 +54,16 @@ class CityService{
             throw {message:err.message};
         }
     }
+
+    async createCities(data){
+        try{
+            const cities = await this.cityRepository.createCities(data);
+            return cities;
+        } catch (err){
+            console.log(`Something went wrong in service layer in city-service`);
+            throw {message:err.message};
+        }
+    }
 }
 
 module.exports = CityService;

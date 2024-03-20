@@ -77,6 +77,16 @@ class CityRepository{
         }
     }
 
+    async createCities(cities){     // here, cities is array of cities
+        try{
+            const res = await City.bulkCreate(cities);
+            return res;
+        } catch (err){
+            console.log(`Something went wrong in CityRepository layer`);
+            throw {message:err};
+        }
+    }
+
 
 }
 
