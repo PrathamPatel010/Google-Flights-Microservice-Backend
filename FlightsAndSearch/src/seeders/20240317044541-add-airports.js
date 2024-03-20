@@ -15,38 +15,37 @@ module.exports = {
 
     await queryInterface.bulkInsert('Airports',[
       {
-        name: "Sardar Vallabhbhai Patel International Airport",
-        cityId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
         name: "Indira Gandhi International Airport",
-        cityId: 15,
+        address: "New Delhi, Delhi 110037",
+        cityId: 44,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         name: "Kempegowda International Airport",
-        cityId: 3,
+        address: "KIAL Rd, Devanahalli, Bengaluru, Karnataka 560300",
+        cityId: 37,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         name: "Mengaluru International Airport",
-        cityId: 3,
+        address: "Bajpe Main Rd, Kenjar HC, Mangaluru, Karnataka 574142",
+        cityId: 37,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         name: "Mysuru International Airport",
-        cityId: 3,
+        address: "Kozhikode-Mysore-Kollegal Hwy, Mysuru, Karnataka 571311",
+        cityId: 37,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         name: "Netaji Subhash Chandra Bose International Airport",
-        cityId: 12,
+        address: "Airport Service Rd, International Airport, Dum Dum, Kolkata, West Bengal 700052",
+        cityId: 41,
         createdAt: new Date(),
         updatedAt: new Date(),
       }

@@ -1,0 +1,131 @@
+const {AirportService} = require('../services/index');
+
+const airportService = new AirportService();
+
+const create = async(req,res) => {
+    try{
+        console.log(req.body);
+        const airport = await airportService.createAirport(req.body);
+        return res.status(200).json({
+            data: airport,
+            success:true,
+            message: "Airport created successfully",
+            err: {},
+        });
+    } catch (err){
+        console.log(`${err.message}`);
+        return res.status(500).json({
+            data: {},
+            success:false,
+            message: "Airport not able to create",
+            err: err.message,
+        });
+    }
+}
+
+const destroy = async(req,res) => {
+    try{
+        const response = await airportService.deleteAirport(req.params.id);
+        return res.status(200).json({
+            data: response,
+            success:true,
+            message: "Airport successfully deleted",
+            err: {},
+        });
+    } catch (err){
+        console.log(`${err.message}`);
+        return res.status(500).json({
+            data: {},
+            success:false,
+            message: "not able to delete the airport",
+            err: err.message,
+        });
+    }
+}
+
+
+// GET -> /airport/:id
+const get = async(req,res) => {
+    try{
+        const response = await airportService.getAirport(req.params.id);
+        return res.status(200).json({
+            data: response,
+            success:true,
+            message: "Airport retrieved successfully",
+            err: {},
+        });
+    } catch (err){
+        console.log(`${err.message}`);
+        return res.status(500).json({
+            data: {},
+            success:false,
+            message: "Not able to get the airport",
+            err: err.message,
+        });
+    }
+}
+
+
+// PATCH -> /airport/:id -> req.body
+const update = async(req,res) => {
+    try{
+        const response = await airportService.updateAirport(req.params.id,req.body);
+        return res.status(200).json({
+            data: response,
+            success:true,
+            message: "Airport updated successfully",
+            err: {},
+        });
+    } catch (err){
+        console.log(`${err.message}`);
+        return res.status(500).json({
+            data: {},
+            success:false,
+            message: "Not able to update the airport",
+            err: err.message,
+        });
+    }
+}
+
+const getAll = async(req,res) => {
+    try{
+        const airports = await airportService.getAllAirports(req.query);   // req.query will have filtration data
+        return res.status(200).json({
+            data: airports,
+            success:true,
+            message: `${airports.length} Airports fetched successfully`,
+            err: {},
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            data: {},
+            success:false,
+            message: "Not able to fetch airports",
+            err:err
+        });
+    }
+}
+
+const createMultiple = async(req,res) => {
+    try{
+        const airports = await airportService.createAirports(req.body);
+        return res.status(200).json({
+            data: airports,
+            success:true,
+            message: "Airports created successfully",
+            err: {},
+        });
+    } catch (err){
+        console.log(`${err.message}`);
+        return res.status(500).json({
+            data: {},
+            success:false,
+            message: "Airports not able to create",
+            err: err.message,
+        });
+    }
+};
+
+module.exports = {create,createMultiple,destroy,get,update,getAll};
+
