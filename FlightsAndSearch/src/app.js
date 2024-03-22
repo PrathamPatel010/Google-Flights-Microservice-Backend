@@ -9,6 +9,7 @@ const setupAndStartServer = async () => {
     app.use(express.urlencoded({extended:true}));
     app.use('/api',ApiRoutes);
     app.listen(PORT,()=>{
+        console.log('MySQL instance connected')
         console.log(`Server is listening on port ${PORT}`);
     });
     if(process.env.SYNC_DB){
