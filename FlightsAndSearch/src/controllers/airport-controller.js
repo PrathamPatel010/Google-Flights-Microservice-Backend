@@ -4,9 +4,8 @@ const airportService = new AirportService();
 
 const create = async(req,res) => {
     try{
-        console.log(req.body);
-        const airport = await airportService.createAirport(req.body);
-        return res.status(200).json({
+        const airport = await airportService.create(req.body);
+        return res.status(201).json({
             data: airport,
             success:true,
             message: "Airport created successfully",
@@ -17,7 +16,7 @@ const create = async(req,res) => {
         return res.status(500).json({
             data: {},
             success:false,
-            message: "Airport not able to create",
+            message: "Not able to create Airport",
             err: err.message,
         });
     }
@@ -25,7 +24,7 @@ const create = async(req,res) => {
 
 const destroy = async(req,res) => {
     try{
-        const response = await airportService.deleteAirport(req.params.id);
+        const response = await airportService.delete(req.params.id);
         return res.status(200).json({
             data: response,
             success:true,
@@ -47,7 +46,7 @@ const destroy = async(req,res) => {
 // GET -> /airport/:id
 const get = async(req,res) => {
     try{
-        const response = await airportService.getAirport(req.params.id);
+        const response = await airportService.get(req.params.id);
         return res.status(200).json({
             data: response,
             success:true,
@@ -69,7 +68,7 @@ const get = async(req,res) => {
 // PATCH -> /airport/:id -> req.body
 const update = async(req,res) => {
     try{
-        const response = await airportService.updateAirport(req.params.id,req.body);
+        const response = await airportService.update(req.params.id,req.body);
         return res.status(200).json({
             data: response,
             success:true,
@@ -89,7 +88,7 @@ const update = async(req,res) => {
 
 const getAll = async(req,res) => {
     try{
-        const airports = await airportService.getAllAirports(req.query);   // req.query will have filtration data
+        const airports = await airportService.getAll();
         return res.status(200).json({
             data: airports,
             success:true,
@@ -107,25 +106,5 @@ const getAll = async(req,res) => {
     }
 }
 
-const createMultiple = async(req,res) => {
-    try{
-        const airports = await airportService.createAirports(req.body);
-        return res.status(200).json({
-            data: airports,
-            success:true,
-            message: "Airports created successfully",
-            err: {},
-        });
-    } catch (err){
-        console.log(`${err.message}`);
-        return res.status(500).json({
-            data: {},
-            success:false,
-            message: "Airports not able to create",
-            err: err.message,
-        });
-    }
-};
-
-module.exports = {create,createMultiple,destroy,get,update,getAll};
+module.exports = {create,destroy,get,update,getAll};
 
