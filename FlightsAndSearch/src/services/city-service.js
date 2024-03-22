@@ -1,53 +1,16 @@
 const {CityRepository} = require('../repository/index');
+const CrudService= require('../services/crud-service');
 
-class CityService{
+class CityService extends CrudService{
     constructor() {
-        this.cityRepository = new CityRepository();
-    }
-
-    async createCity(data){
-        try{
-            const city = await this.cityRepository.createCity(data);
-            return city;
-        } catch (err){
-            console.log(`Something went wrong in service layer in city-service`);
-            throw {message:err.message};
-        }
-    }
-
-    async updateCity(cityId,data){
-        try{
-            const city = await this.cityRepository.updateCity(cityId,data);
-            return city;
-        } catch (err){
-            console.log(`Something went wrong in service layer in city-service`);
-            throw {message:err.message};
-        }
-    }
-
-    async deleteCity(cityId){
-        try{
-            const response = await this.cityRepository.deleteCity(cityId);
-            return response;
-        } catch (err){
-            console.log(`Something went wrong in service layer in city-service`);
-            throw {message:err.message};
-        }
-    }
-
-    async getCity(cityId){
-        try{
-            const city = await this.cityRepository.getCity(cityId);
-            return city;
-        } catch (err){
-            console.log(`Something went wrong in service layer in city-service`);
-            throw {message:err.message};
-        }
+        const cityRepository = new CityRepository();
+        super(cityRepository);
     }
 
     async getAllCities(filter){     // filter can be empty
         try{
-            const cities = await this.cityRepository.getAllCities({name:filter.name});
+            const cityRepository = new CityRepository();
+            const cities = await cityRepository.getAllCities({name:filter.name});
             return cities;
         } catch (err){
             console.log(`Something went wrong in service layer in city-service`);
@@ -57,7 +20,8 @@ class CityService{
 
     async createCities(data){
         try{
-            const cities = await this.cityRepository.createCities(data);
+            const cityRepository = new CityRepository();
+            const cities = await cityRepository.createCities(data);
             return cities;
         } catch (err){
             console.log(`Something went wrong in service layer in city-service`);
@@ -67,7 +31,8 @@ class CityService{
 
     async getAirports({cityId}){    // destructuring city ID from the object
         try{
-            const airports = await this.cityRepository.getAirports(cityId);
+            const cityRepository = new CityRepository();
+            const airports = await cityRepository.getAirports(cityId);
             return airports;
         } catch (err){
             console.log(`Something went wrong in service layer in city-service`);
