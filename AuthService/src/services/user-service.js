@@ -68,6 +68,26 @@ class UserService{
         }
     }
 
+    async isAuthenticated(token){
+        try{
+            const response = this.verifyToken(token);
+            if (!response){
+                throw {error: 'Invalid Token'};
+            }
+
+            // What if user created the account but after signing in, within 1 day, they deleted account.
+            // So, we are making sure that corresponding user still exist or not.
+            const user = await this.userRepository.getById(response.id);
+            if (!user){
+                throw {error: 'No user with corresponding token exist'};
+            }
+            return user;
+        } catch (error){
+            console.log('Something went wrong in token verification');
+            throw error;
+        }
+    }
+
 }
 
 module.exports = UserService;
