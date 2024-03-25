@@ -17,4 +17,9 @@ router.get('/isAuthenticated',
     UserController.checkUserAuth
 );
 
+router.post('/isAdmin',
+    AuthRequestValidator.validateUserRoleAuth,
+    UserController.isAdmin
+);
+
 module.exports = router;

@@ -88,6 +88,15 @@ class UserService{
         }
     }
 
+    async isAdmin(userId){
+        try{
+            return await this.userRepository.isAdmin(userId);
+        } catch (error){
+            console.log('Something went wrong in service layer');
+            throw error;
+        }
+    }
+
 }
 
 module.exports = UserService;

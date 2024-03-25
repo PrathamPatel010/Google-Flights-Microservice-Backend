@@ -64,4 +64,24 @@ const checkUserAuth = async(req, res) => {
     }
 }
 
-module.exports = {createUser,signIn,checkUserAuth};
+const isAdmin = async(req,res) => {
+    // we expect userId parameter in request body to check if user has admin privileges
+    try{
+        const response = await userService.isAdmin(req.body.userId);
+        res.status(200).json({
+            success: true,
+            data: response,
+            message: 'User is admin or not fetched successfully',
+            err: {}
+        });
+    } catch (error){
+        res.status(500).json({
+            message: 'Something went wrong',
+            success: false,
+            data: {},
+            err: error
+        });
+    }
+}
+
+module.exports = {createUser,signIn,checkUserAuth,isAdmin};

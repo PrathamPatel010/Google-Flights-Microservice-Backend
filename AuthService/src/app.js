@@ -13,12 +13,6 @@ const prepareAndStartServer = () => {
             await db.sequelize.sync({alter:true});
         }
         console.log(`Auth Service is listening on port ${PORT}`);
-        const user = await User.findByPk(2);
-        // const role = await Role.findByPk(2);
-        // user.addRole(role);
-        // const response = await role.getUsers();
-        const response = await user.hasRole(2);
-        console.log(response);
     });
 }
 

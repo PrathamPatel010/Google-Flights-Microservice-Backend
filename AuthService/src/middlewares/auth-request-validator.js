@@ -10,4 +10,17 @@ const validateUserAuth = (req,res,next) => {
     next();
 }
 
-module.exports = {validateUserAuth};
+const validateUserRoleAuth = (req,res,next) => {
+    if (!req.body.userId) {
+        return res.status(400).json({
+            success:false,
+            data:{},
+            message:'Something went wrong',
+            err: 'userId is missing is in the request body'
+        });
+    }
+
+    next();
+}
+
+module.exports = {validateUserAuth,validateUserRoleAuth};
