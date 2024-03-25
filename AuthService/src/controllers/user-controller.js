@@ -1,4 +1,5 @@
 const UserService = require('../services/user-service');
+const {StatusCodes} = require("http-status-codes");
 
 const userService = new UserService();
 const createUser = async(req,res) => {
@@ -7,7 +8,7 @@ const createUser = async(req,res) => {
             email: req.body.email,
             password: req.body.password,
         });
-        return res.status(201).json({
+        return res.status(StatusCodes.CREATED).json({
             success: true,
             message: 'User created successfully!',
             data: response,
@@ -15,7 +16,7 @@ const createUser = async(req,res) => {
         });
     } catch (error){
         console.log(error);
-        res.status(500).json({
+        res.status(error.statusCode).json({
             message: 'Something went wrong',
             success: false,
             data: {},
