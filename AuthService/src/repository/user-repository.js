@@ -1,5 +1,5 @@
 const {User,Role} = require('../models/index');
-const {UniqueConstraintError,ValidationError} = require('../utils/errors');
+const {UniqueConstraintError,ValidationError,NotFoundError} = require('../utils/errors');
 class UserRepository{
     async create(data){
         try{
@@ -36,6 +36,9 @@ class UserRepository{
             const user = await User.findByPk(userId,{
                 attributes:['email','id']
             });
+            if (!user){
+                throw new NotFoundError({message:'No user found !!',explanation:'Please check the userId again'});
+            }
             return user;
         } catch(error){
             console.log('Something went wrong in user repository layer');
@@ -50,6 +53,9 @@ class UserRepository{
                     email: userEmail
                 }
             });
+            if (!user){
+                throw new NotFoundError({message:'No user found !!',explanation:'Please check the emailID again'});
+            }
             return user;
         } catch(error){
             console.log('Something went wrong in user repository layer');
@@ -60,12 +66,15 @@ class UserRepository{
     async isAdmin(userId){
         try{
             const user = await User.findByPk(userId);
+            if (!user){
+                throw new NotFoundError({message:'No user found !!',explanation:'Please check the userId again'});
+            }
             const adminRole = await Role.findOne({
                 where:{
                     name: 'ADMIN'
                 }
             });
-            const result = await user.hasRole(adminRole)
+            const result = await user.hasRole(adminRole);
             if (!result){
                 return {message: 'User is not admin'};
             }
