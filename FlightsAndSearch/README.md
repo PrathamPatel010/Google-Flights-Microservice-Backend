@@ -18,7 +18,7 @@
  - Execute `cd FlightsAndSearch` 
  - Execute `npm install`
  - Create a `.env` file in FlightsAndSearch folder and add following environment variable
-    - `PORT=3001`
+    - `PORT=3000`
  - Inside `src/config` folder, create a new file `config.json` and then add following piece of json.
 
 ```
