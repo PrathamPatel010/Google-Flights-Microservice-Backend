@@ -1,12 +1,14 @@
-# AUTH SERVICE
+# REMINDER SERVICE
 
 # Folder Structure
     - src/
         config/
         app.js //server
+        routes/
         seeders/
         migrations/
         models/
+        repository/
         controller/
         middlewares/
         services/
@@ -14,10 +16,10 @@
 
 # Project Setup
 - clone the project.
-- Execute `cd AuthService`
+- Execute `cd ReminderService`
 - Execute `npm install`
-- Create a `.env` file in AuthService folder and add following environment variable
-    - `PORT=3002`
+- Create a `.env` file in BookingService folder and add following environment variable
+    - `PORT=3004`
 - Inside `src/config` folder, create a new file `config.json` and then add following piece of json.
 
 ```
@@ -25,7 +27,7 @@
   "development": {
     "username": <YOUR_DB_USERNAME>,
     "password": <YOUR_DB_PASSWORD>,
-    "database": "AUTH_DB_DEV",
+    "database": "REMINDER_DB_DEV",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
