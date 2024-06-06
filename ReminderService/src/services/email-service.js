@@ -15,10 +15,10 @@ const sendBasicEmail = async(mailFrom,mailTo,mailSubject,mailBody) => {
     }
 }
 
-const fetchPendingEmails = async (timestamp) => {
+const fetchPendingEmails = async () => {
     try{
         const repo = new TicketRepository();
-        const response = await repo.getAll();
+        const response = await repo.get({status:"PENDING"});
         return response;
     } catch (error){
         console.log(error.message);
@@ -26,4 +26,15 @@ const fetchPendingEmails = async (timestamp) => {
     }
 }
 
-module.exports = {sendBasicEmail,fetchPendingEmails}
+const createNotificationTicket = async (data) => {
+    try{
+        const repo = new TicketRepository();
+        const ticket = await repo.create(data);
+        return ticket;
+    } catch (error){
+        console.log("Error in Service layer: ",error.message);
+        throw error;
+    }
+}
+
+module.exports = {sendBasicEmail,fetchPendingEmails,createNotificationTicket};
