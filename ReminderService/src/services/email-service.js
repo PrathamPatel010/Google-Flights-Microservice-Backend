@@ -2,8 +2,6 @@ const sender = require('../config/emailConfig');
 const TicketRepository = require('../repository/ticket-repository');
 const { join} = require("path");
 const {readFileSync} = require("fs");
-require('dotenv').config();
-const EMAIL_TEMPLATE = process.env.EMAIL_TEMPLATE;
 const sendBasicEmail = async(mailFrom,mailTo,mailSubject,mailBody) => {
     try{
         const templatePath = join(__dirname, '../','utils/emailTemplate.html');
@@ -48,4 +46,14 @@ const createNotificationTicket = async (data) => {
     }
 }
 
-module.exports = {sendBasicEmail,fetchPendingEmails,createNotificationTicket};
+const updateTicketStats = async(ticketId,data) => {
+    try{
+        const repo = new TicketRepository();
+        const ticket = await repo.update(ticketId,data);
+        return ticket;
+    } catch (error){
+        console.log("Error in Service layer: ",error.message);
+        throw error;
+    }
+}
+module.exports = {sendBasicEmail,fetchPendingEmails,createNotificationTicket,updateTicketStats};
