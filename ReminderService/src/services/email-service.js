@@ -1,12 +1,23 @@
 const sender = require('../config/emailConfig');
 const TicketRepository = require('../repository/ticket-repository');
+const { join} = require("path");
+const {readFileSync} = require("fs");
+require('dotenv').config();
+const EMAIL_TEMPLATE = process.env.EMAIL_TEMPLATE;
 const sendBasicEmail = async(mailFrom,mailTo,mailSubject,mailBody) => {
     try{
+        const templatePath = join(__dirname, '../','utils/emailTemplate.html');
+        let htmlTemplate = readFileSync(templatePath, 'utf8');
+
+        // Replace placeholders in the template
+        htmlTemplate = htmlTemplate.replace('[Recipient\'s Name]', mailTo);
+        htmlTemplate = htmlTemplate.replace('[Content]', mailBody);
+        console.log(htmlTemplate);
         const res = await sender.sendMail({
             from: mailFrom,
             to: mailTo,
             subject: mailSubject,
-            text: mailBody,
+            html: htmlTemplate,
         });
         return res;
     } catch (error){
