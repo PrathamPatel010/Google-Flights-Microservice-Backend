@@ -1,7 +1,8 @@
 module.exports = {
-    PORT:process.env.PORT,
+    PORT:process.env.PORT || 3005,
     FLIGHTSERVICE:process.env.FLIGHTSERVICE,
     AUTHSERVICE:process.env.AUTHSERVICE,
+    AUTHSERVICE_URL:process.env.AUTHSERVICE_URL,
     BOOKINGSERVICE:process.env.BOOKINGSERVICE,
     REMINDERSERVICE:process.env.REMINDERSERVICE,
 }

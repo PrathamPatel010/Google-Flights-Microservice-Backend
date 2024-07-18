@@ -3,8 +3,8 @@ const express = require('express');
 const morgan = require('morgan');
 const {createProxyMiddleware} = require('http-proxy-middleware');
 const rateLimit = require('express-rate-limit');
-const { FLIGHTSERVICE, AUTHSERVICE, BOOKINGSERVICE, REMINDERSERVICE } = require('./config/serverConfig');
-const PORT = process.env.PORT;
+const { PORT,FLIGHTSERVICE, AUTHSERVICE, BOOKINGSERVICE, REMINDERSERVICE } = require('./config/serverConfig');
+const validateRequest = require('./middlewares/authenticateRequest');
 
 const app = express();
 
@@ -17,6 +17,12 @@ const limiter = rateLimit({
 
 app.use(morgan('combined'));    // logger 
 app.use(limiter);
+
+// for preventing unauthorized access
+// if request does not have token OR has malformed token,It will return unauthorized and will not redirect request to server
+app.use('/bookingservice',validateRequest);
+app.use('/reminderservice',validateRequest);
+
 
 // request redirection to appropriate service
 app.use('/flightservice',createProxyMiddleware({target:FLIGHTSERVICE,changeOrigin:true}));
