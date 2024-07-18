@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const {createProxyMiddleware} = require('http-proxy-middleware');
 const rateLimit = require('express-rate-limit');
+const { FLIGHTSERVICE, AUTHSERVICE, BOOKINGSERVICE, REMINDERSERVICE } = require('./config/serverConfig');
 const PORT = process.env.PORT;
 
 const app = express();
@@ -18,10 +19,10 @@ app.use(morgan('combined'));    // logger
 app.use(limiter);
 
 // request redirection to appropriate service
-app.use('/flightservice',createProxyMiddleware({target:'http://localhost:3001/',changeOrigin:true}));
-app.use('/authservice',createProxyMiddleware({target:'http://localhost:3002/',changeOrigin:true}));
-app.use('/bookingservice',createProxyMiddleware({target:'http://localhost:3003/',changeOrigin:true}));
-app.use('/reminderservice',createProxyMiddleware({target:'http://localhost:3004/',changeOrigin:true}));
+app.use('/flightservice',createProxyMiddleware({target:FLIGHTSERVICE,changeOrigin:true}));
+app.use('/authservice',createProxyMiddleware({target:AUTHSERVICE,changeOrigin:true}));
+app.use('/bookingservice',createProxyMiddleware({target:BOOKINGSERVICE,changeOrigin:true}));
+app.use('/reminderservice',createProxyMiddleware({target:REMINDERSERVICE,changeOrigin:true}));
 
 app.get('/',(req,res)=>{
     return res.json({message:'API Gateway is up & running'});
